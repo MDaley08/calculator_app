@@ -21,17 +21,25 @@ body {
 
 #display {
     display: flex;
+    flex-direction: column;
     align-items: end;
     justify-content: end;
-    overflow-wrap: break-word;
-    font-size: 40px;
-    padding-right: 5px;
+    padding: 0 4px;
     background-color: rgba(156, 225, 156, 0.797);
     border-radius: 2px;
     border: 10px inset black;
     margin-bottom: 22px;
     height: 70px;
     width: 325px;
+}
+
+#display p {
+    overflow: scroll;
+    word-wrap: break-word;
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 5px;
+    max-width: 320px;
 }
 
 button {

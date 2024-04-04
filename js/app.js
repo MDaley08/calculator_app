@@ -1,5 +1,6 @@
 //queries all buttons on page. all buttons are currently only calculator buttons
 const clearBtn = document.getElementById("clear");
+const displayIn = document.getElementById("input")
 const delBtn = document.getElementById("delete");
 const equalBtn = document.getElementById("equal");
 const numpadBtns = document.querySelectorAll(".numpad button");
@@ -8,47 +9,53 @@ const operatorsList = ['+','-','*','/'];
 let expression = '0';
 let updated = false;
 let resultShown = false;
-let prevBtn;
-display.textContent = expression;
+displayIn.textContent = expression;
 
-let updateDisplay = value => {
+clearBtn.addEventListener("click", clearDisplay);
+equalBtn.addEventListener("click", evaluateExpression);
+delBtn.addEventListener("click", () => {
+    if(resultShown) return;
+    expression = expression.slice(0,-1);
+    updateDisplay();
+});
+
+numpadBtns.forEach(element => element.addEventListener("click", () => {
+    if(element.id !== 'equal'){
+        updateExpression(element.textContent);
+    }
+    updateDisplay();
+}));
+
+
+function updateLastBtn(button){
+    prevBtn = button;
+}
+function updateExpression(value){
     if(!updated||resultShown){
-        display.textContent = value;
         expression = value;
         updated = true;
         resultShown = false;
         return;
     } 
     expression += value;
-    display.textContent = expression;
 }
 
-let evaluateExpression = () => {
+function updateDisplay(){
+    displayIn.textContent = expression;
+}
+
+function evaluateExpression(){
     expression = evaluate(expression);
-    display.textContent = expression;
+    displayIn.textContent = expression;
     resultShown = true;
 }
 
-let clearDisplay = () =>{
-    display.textContent = '0';
+function clearDisplay(){
+    displayIn.textContent = '0';
     expression = '0';
     updated = false;
     resultShown = false;
 }
-
-
-
-clearBtn.addEventListener("click", clearDisplay);
-equalBtn.addEventListener("click", evaluateExpression);
-
-console.log(numpadBtns);
-
-numpadBtns.forEach(element => element.addEventListener("click", () => {
-    if(element.id !== 'equal'){
-        updateDisplay(element.textContent);
-    }
-}));
-
 
 function add(num1, num2){
     return num1 + num2;
@@ -117,5 +124,5 @@ function evaluate(inString){
                 break;
         }
     }
-    return numArr[0] || 'Undefined';
+    return (Math.round(numArr[0] * 10000) / 10000) || 'Undefined';
 }
