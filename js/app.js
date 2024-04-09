@@ -21,15 +21,16 @@ delBtn.addEventListener("click", () => {
 
 numpadBtns.forEach(element => element.addEventListener("click", () => {
     if(element.id !== 'equal'){
+        let lastChar = expression.slice(-1)
+        if((lastChar === '*'||lastChar === '+'||lastChar ==='-'|| lastChar ==='/') && element.className === 'operator'){
+            return;
+        }
         updateExpression(element.textContent);
     }
     updateDisplay();
 }));
 
 
-function updateLastBtn(button){
-    prevBtn = button;
-}
 function updateExpression(value){
     if(!updated||resultShown){
         expression = value;
