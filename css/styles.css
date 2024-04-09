@@ -64,14 +64,16 @@ button:active {
 
 
 .special-keys{
+    display: flex;
     margin-left: auto;
+    margin-right: 5px;
     margin-bottom: 6px;
 }
 .special-keys button{
     background-color: rgb(178, 75, 75);
     border-color: rgb(153, 68, 68);
     font-size: 20px;
-    padding: 2px;
+    min-width: fit-content;
 }
 .numpad {
     display: flex;
