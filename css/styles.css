@@ -34,12 +34,16 @@ body {
 }
 
 #display p {
-    overflow: scroll;
+    color: rgba(20, 20, 20, 0.8);
+    overflow-y: scroll;
     word-wrap: break-word;
     font-size: 22px;
     font-weight: 500;
     margin-bottom: 5px;
+    margin-top: 0;
+    padding-right: 10px;
     max-width: 320px;
+    scrollbar-color: rgba(20, 20, 20, 0.829) rgba(0,0,0,0);
 }
 
 button {
